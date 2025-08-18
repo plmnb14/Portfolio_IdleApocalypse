@@ -11,7 +11,7 @@ public class Hero : Entity
     //----------------------------------------------------------------------------------------------------
     #region Serialize Fields
     [Space]
-    [Header("«√∑π¿ÃæÓ ƒ≥∏Ø≈Õ (Player Character)")]
+    [Header("ÌîåÎ†àÏù¥Ïñ¥ Ï∫êÎ¶≠ÌÑ∞ (Player Character)")]
     [SerializeField] protected SpriteRenderer _frontArmRenderer;
     [SerializeField] protected EquipedWeapon _equipedWeapon;
     [SerializeField] protected ObscuredFloat _maxAimTime;
@@ -103,8 +103,8 @@ public class Hero : Entity
         ResetInstanceStatus();
         ResetAutoAttackElement();
 
-        _projectileShooter.Set_User(this);
-        _projectileShooter.Set_AttackDB(AutoAttackDB);
+        _projectileShooter.SetUser(this);
+        _projectileShooter.SetAttackDB(AutoAttackDB);
 
         SetUpBeforeActive();
 
@@ -400,7 +400,7 @@ public class Hero : Entity
                 }
 
                 else
-                    MessageNotificationManager.Instance.ShowInstanceMessageNotification("≈∏∞Ÿ¿Ã ¡∏¿Á«œ¡ˆ æ Ω¿¥œ¥Ÿ.");
+                    MessageNotificationManager.Instance.ShowInstanceMessageNotification("ÌÉÄÍ≤üÏù¥ Ï°¥Ïû¨ÌïòÏßÄ ÏïäÏäµÎãàÎã§.");
             }
         }
 
@@ -430,9 +430,9 @@ public class Hero : Entity
         StageManager.Instance.StopKillStageTimer();
     }
 
-    public override void End_Die()
+    public override void EndDie()
     {
-        base.End_Die();
+        base.EndDie();
 
         StageManager.Instance.ClearCurrentStage(StageClearType.Defeat);
     }
@@ -543,7 +543,7 @@ public class Hero : Entity
         if (_activateSkillSlotIdx != -1)
         {
             var skillMgr = SkillManager.Instance;
-            var isSelfUse = SkillManager.Instance.Check_SelfUseType(_activateSkillSlotIdx);
+            var isSelfUse = SkillManager.Instance.CheckSelfUseType(_activateSkillSlotIdx);
 
             if (CurCastingSkillId != string.Empty &&
                 (skillMgr.CheckCanUseQuickSlotSkill(_activateSkillSlotIdx, CurCastingSkillId) || isSelfUse))
@@ -650,9 +650,9 @@ public class Hero : Entity
         }
     }
 
-    public override void Finish_AutoAttack()
+    public override void FinishAutoAttack()
     {
-        base.Finish_AutoAttack();
+        base.FinishAutoAttack();
 
         CurEntityState = EntityState.Aim;
     }
@@ -934,7 +934,7 @@ public class Hero : Entity
     #endregion
 
     #region Buff Methods
-    public override BuffAddResultType Add_Buff(BuffStatus buffStatus)
+    public override BuffAddResultType AddBuff(BuffStatus buffStatus)
     {
         var returnValue = base.Add_Buff(buffStatus);
         if (returnValue == BuffAddResultType.New)
@@ -1005,4 +1005,5 @@ public class Hero : Entity
         return returnValue;
     }
     #endregion
+
 }
