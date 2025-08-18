@@ -53,12 +53,12 @@ public class VFXBattle : VFX
     {
         var instanceAbility = user.InstanceEntityAbility;
         MyBattleDB.DeepCopyUserInfo(user, user.CurEntityAbility);
-        MyBattleDB.target = instanceAbility.targetEntityList[0];
-        MyBattleDB.targetAbility = MyBattleDB.target.CurEntityAbility;
-        MyBattleDB.curAttackDB = attackDB;
+        MyBattleDB.Target = instanceAbility.targetEntityList[0];
+        MyBattleDB.TargetAbility = MyBattleDB.Target.CurEntityAbility;
+        MyBattleDB.CurAttackDB = attackDB;
         MyBattleDB.CurActionCount = actionCount;
 
-        TargetMask = instanceAbility.targetLayerMask;
+        TargetMask = instanceAbility.TargetLayerMask;
 
         SetUpDiedEvent();
 
@@ -71,8 +71,8 @@ public class VFXBattle : VFX
 
         transform.TransformDirection(direction);
 
-        MyBattleDB.usePosition = position;
-        MyBattleDB.useDirection = direction;
+        MyBattleDB.UsePosition = position;
+        MyBattleDB.UseDirection = direction;
 
         SetUpDiedEvent();
 
@@ -81,12 +81,11 @@ public class VFXBattle : VFX
 
     protected void SetUpDiedEvent()
     {
-        if (MyBattleDB.cur_UserSkillDB != null)
+        if (MyBattleDB.CurUserSkillDB != null)
         {
-
             MyBattleDB.user.EntityDied += Play_EndVFX;
             StageManager.Instance.ChangeWave += Play_EndVFX;
-            MyBattleDB.cur_UserSkillDB.OnDismountSkill += Play_EndVFX;
+            MyBattleDB.CurUserSkillDB.OnDismountSkill += Play_EndVFX;
         }
 
         else
@@ -98,25 +97,25 @@ public class VFXBattle : VFX
 
     private void RemoveDiedEvent()
     {
-        if(MyBattleDB.user == null)
+        if(MyBattleDB.User == null)
             return;
 
-        if (MyBattleDB.cur_UserSkillDB != null)
+        if (MyBattleDB.CurUserSkillDB != null)
         {
-            if (MyBattleDB.user.EntityDied != null)
-                MyBattleDB.user.EntityDied -= Play_EndVFX;
+            if (MyBattleDB.User.EntityDied != null)
+                MyBattleDB.User.EntityDied -= Play_EndVFX;
 
             if (StageManager.Instance.ChangeWave != null)
                 StageManager.Instance.ChangeWave -= Play_EndVFX;
 
-            if (MyBattleDB.cur_UserSkillDB.OnDismountSkill != null)
-                MyBattleDB.cur_UserSkillDB.OnDismountSkill -= Play_EndVFX;
+            if (MyBattleDB.CurUserSkillDB.OnDismountSkill != null)
+                MyBattleDB.CurUserSkillDB.OnDismountSkill -= Play_EndVFX;
         }
 
         else
         {
-            if (MyBattleDB.user.EntityDied != null)
-                MyBattleDB.user.EntityDied -= SetStopUsing;
+            if (MyBattleDB.User.EntityDied != null)
+                MyBattleDB.User.EntityDied -= SetStopUsing;
 
             if (StageManager.Instance.ChangeWave != null)
                 StageManager.Instance.ChangeWave -= SetStopUsing;
@@ -125,8 +124,8 @@ public class VFXBattle : VFX
 
     protected virtual void SetUpAoeToScale()
     {
-        var _aoe = (float)MyBattleDB.cur_UserSkillDB.CommonAbilityGroups
-            [MyBattleDB.commonAbilityIdx].commonAbilityDict[SkillCommonAbilityType.Aoe].GetAbilityValue(Ability_CalcValueType.Final);
+        var _aoe = (float)MyBattleDB.CurUserSkillDB.CommonAbilityGroups
+            [MyBattleDB.CommonAbilityIdx].commonAbilityDict[SkillCommonAbilityType.Aoe].GetAbilityValue(Ability_CalcValueType.Final);
         SetScaleRatio(_aoe);
     }
 	#endregion
@@ -155,25 +154,25 @@ public class VFXBattle : VFX
         if (OnStopUsing)
             return new(1);
 
-        if (!MyBattleDB.isTargeting || target != MyBattleDB.target)
+        if (!MyBattleDB.IsTargeting || target != MyBattleDB.Target)
 			Update_CollideTarget(target);
 
 		return CollisionDmg(target, hitCross);
 	}
 
-    protected void Update_CollideTarget(Entity _target)
+    protected void UpdateCollideTarget(Entity target)
     {
-        MyBattleDB.target = _target;
-        MyBattleDB.targetAbility = _target.CurEntityAbility;
+        MyBattleDB.Target = target;
+        MyBattleDB.TargetAbility = target.CurEntityAbility;
     }
 
     private const int DEFAULT_HITCOUNT = 1;
     protected DmgResultData CollisionDmg(Entity target, Vector2 hitCross)
     {
-        var dmgResult = MyBattleDB.cur_UserSkillDB != null 
+        var dmgResult = MyBattleDB.CurUserSkillDB != null 
             ? BattleCalculator.CalculateSkillDmg(MyBattleDB) 
             : BattleCalculator.CalculateDmg(MyBattleDB, DEFAULT_HITCOUNT);
-        dmgResult.hitCross = hitCross;
+        dmgResult.HitCross = hitCross;
 
         target.TakeDamage(ref dmgResult);
         OnCollide?.Invoke();
@@ -235,7 +234,7 @@ public class VFXBattle : VFX
         RemoveDiedEvent();
         SetStopUsing();
 
-        base.Play_EndVFX();
+        base.PlayEndVFX();
     }
 
     protected virtual void FuncAfterCollided(DmgResultData dmgResult) { }
@@ -263,18 +262,19 @@ public class VFXBattle : VFX
 
     public virtual void FinishCharged()
     {
-        if(MyBattleDB.user.CurEntityState == Entity.EntityState.Skill ||
-            MyBattleDB.user.CurEntityState == Entity.EntityState.Attack ||
-            MyBattleDB.user.CurEntityState == Entity.EntityState.Aim)
+        if(MyBattleDB.User.CurEntityState == Entity.EntityState.Skill ||
+            MyBattleDB.User.CurEntityState == Entity.EntityState.Attack ||
+            MyBattleDB.User.CurEntityState == Entity.EntityState.Aim)
         {
-            MyBattleDB.user.Finish_Charged();
+            MyBattleDB.User.FinishCharged();
         }
 
         else
-            End_Die();
+            EndDie();
     }
 
     public virtual void FuncAfterCharged(ObscuredBool boolen) { MyAnimator.SetBool("IsCharged", boolen); }
     #endregion
 }
+
 
