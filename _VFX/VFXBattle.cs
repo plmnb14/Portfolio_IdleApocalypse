@@ -37,7 +37,7 @@ public class VFXBattle : VFX
     //----------------------------------------------------------------------------------------------------
     #region SetUp Methods
     public void SetStopUsing() { OnStopUsing = true; }
-    public virtual void SetUp_UserOnly(Entity user) { MyBattleDB.user = user; }
+    public virtual void SetUpUserOnly(Entity user) { MyBattleDB.user = user; }
 
     public virtual void SetUpStatus(BattleDB_Skill battleDB_Skill, LayerMask targetMask)
     {
@@ -222,13 +222,13 @@ public class VFXBattle : VFX
     #endregion
 
     #region Play Methods
-    protected virtual void Play_CollisionVFX() { }
+    protected virtual void PlayCollisionVFX() { }
 
     protected virtual void PlayDeathVFX(Vector2 hitCross) { }
 
-    public virtual void Play_EtcVfX(Entity target, DmgResultData dmg_ResultDB) { }
+    public virtual void PlayEtcVfX(Entity target, DmgResultData dmg_ResultDB) { }
 
-    public override void Play_EndVFX()
+    public override void PlayEndVFX()
     {
         if (onDiedAnimation) return;
 
@@ -242,7 +242,7 @@ public class VFXBattle : VFX
     #endregion
 
     #region End Methods
-    public override void Kill_Forced(ObscuredBool isForced)
+    public override void KillForced(ObscuredBool isForced)
     {
         if(ShowDamagedRoutine != null)
         {
@@ -261,7 +261,7 @@ public class VFXBattle : VFX
         base.Kill_Forced(isForced);
     }
 
-    public virtual void Finish_Charged()
+    public virtual void FinishCharged()
     {
         if(MyBattleDB.user.CurEntityState == Entity.EntityState.Skill ||
             MyBattleDB.user.CurEntityState == Entity.EntityState.Attack ||
@@ -274,6 +274,7 @@ public class VFXBattle : VFX
             End_Die();
     }
 
-    public virtual void Func_AfterCharged(ObscuredBool boolen) { MyAnimator.SetBool("IsCharged", boolen); }
+    public virtual void FuncAfterCharged(ObscuredBool boolen) { MyAnimator.SetBool("IsCharged", boolen); }
     #endregion
 }
+
