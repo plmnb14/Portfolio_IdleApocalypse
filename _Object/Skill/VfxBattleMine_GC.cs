@@ -25,7 +25,7 @@ public class VfxBattleMine_GC : VfxBattleMine
     private readonly ObscuredFloat _perSizeRatio = 0.15f; 
     private IEnumerator CreateGlacial()
     {
-        // Aoe¿¡ µû¶ó ¼³Ä¡°Å¸®°¡ Á¶Á¤µÊ
+        // Aoeì— ë”°ë¼ ì„¤ì¹˜ê±°ë¦¬ê°€ ì¡°ì •ë¨
         var aoe = (float)MyBattleDB.CurUserSkillDB.CommonAbilityGroups
             [MyBattleDB.CommonAbilityIdx].commonAbilityDict[SkillCommonAbilityType.Aoe].GetAbilityValue(Ability_CalcValueType.Final);
 
@@ -33,7 +33,7 @@ public class VfxBattleMine_GC : VfxBattleMine
         var curCreateCnt = maxCreateCnt;
         while(curCreateCnt > 0)
         {
-            // °¥¼ö·Ï »çÀÌÁî°¡ Ä¿Áöµµ·Ï ¼³Á¤
+            // ê°ˆìˆ˜ë¡ ì‚¬ì´ì¦ˆê°€ ì»¤ì§€ë„ë¡ ì„¤ì •
             var gapCnt = maxCreateCnt - curCreateCnt;
             var x = (_defaultCreateDistance * aoe) * gapCnt + (_perSizeRatio * gapCnt);
             x += gapCnt == 0 ? _minCreateDistance : 0;
@@ -60,7 +60,7 @@ public class VfxBattleMine_GC : VfxBattleMine
         Play_EndVFX();
     }
 
-    public override void Play_EndVFX()
+    public override void PlayEndVFX()
     {
         if (onDiedAnimation) return;
 
@@ -70,7 +70,7 @@ public class VfxBattleMine_GC : VfxBattleMine
             _createCoroutine = null;
         }
 
-        base.Play_EndVFX();
+        base.PlayEndVFX();
     }
     #endregion
 
@@ -87,3 +87,4 @@ public class VfxBattleMine_GC : VfxBattleMine
     }
     #endregion
 }
+
