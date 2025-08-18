@@ -55,7 +55,7 @@ public class MonsterRaidBoss : MonsterBoss
         SoundManager.Instance.PlayEffectAudio(_houndSummonAudioName);
     }
 
-    public override void Finish_Summoning()
+    public override void FinishSummoning()
     {
         base.Finish_Summoning();
 
@@ -109,7 +109,7 @@ public class MonsterRaidBoss : MonsterBoss
     #endregion
 
     #region Check Methods
-    private const string BERSERK_GRADE = "����ȭ {0}�ܰ�!!";
+    private const string BERSERK_GRADE = "±¤ÆøÈ­ {0}´Ü°è!!";
     protected void CheckPhaseByTime(ObscuredFloat _timeValue)
     {
         var dbList = DataManager.Instance.ReinforceDBDicts
@@ -151,7 +151,7 @@ public class MonsterRaidBoss : MonsterBoss
     }
 
     private Action OnEndAtk;
-    public override void Finish_AutoAttack()
+    public override void FinishAutoAttack()
     {
         OnEndAtk?.Invoke();
 
@@ -174,4 +174,5 @@ public class MonsterRaidBoss : MonsterBoss
         CurEntityState = EntityState.Idle;
     }
     #endregion
+
 }
