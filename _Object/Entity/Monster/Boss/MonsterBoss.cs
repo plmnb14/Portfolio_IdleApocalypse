@@ -177,11 +177,11 @@ public class MonsterBoss : Monster
         enemyDB_Cur.CurActionCnt = 0;
     }
 
-    public override void Finish_AutoAttack()
+    public override void FinishAutoAttack()
     {
         ReadyNextAttack();
 
-        base.Finish_AutoAttack();
+        base.FinishAutoAttack();
 
         _cooldownSliderUI.gameObject.SetActive(true);
         _cooldownSliderUI.ActivateObject(true);
@@ -189,7 +189,7 @@ public class MonsterBoss : Monster
         StartCoroutine(UpdateCooldownSliderUIPosition());
     }
 
-    public virtual void Attack_Automatically()
+    public virtual void AttackAutomatically()
     {
         var beforePhase = enemyDB_Cur.CurCombatPhase;
         var beforeAtkIdx = enemyDB_Cur.CurAtkDBIdx;
@@ -274,5 +274,6 @@ public class MonsterBoss : Monster
     }
     #endregion
 }
+
 
 
