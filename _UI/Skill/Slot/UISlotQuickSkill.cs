@@ -220,9 +220,9 @@ public class UISlotQuickSkill : UISlotSkillBase, IPointerClickHandler
     #endregion
 
     #region Unlock Methods
-    protected override void Unlock_UIObject(ObscuredBool isUnlock)
+    protected override void UnlockUIObject(ObscuredBool isUnlock)
     {
-        base.Unlock_UIObject(isUnlock);
+        base.UnlockUIObject(isUnlock);
 
         slotBackground.raycastTarget = isUnlock;
     }
@@ -241,4 +241,5 @@ public class UISlotQuickSkill : UISlotSkillBase, IPointerClickHandler
     }
     #endregion
 }
+
 
