@@ -82,11 +82,11 @@ public class VfxBattle_GlacialCascade : VFXBattle
             hitCross, BackgroundManager.Instance.GetScrolledWorldTransform());
     }
 
-    public override void Play_EndVFX()
+    public override void PlayEndVFX()
     {
         if (onDiedAnimation) return;
 
-        base.Play_EndVFX();
+        base.PlayEndVFX();
 
         if (VfxTimer != null)
         {
@@ -120,3 +120,4 @@ public class VfxBattle_GlacialCascade : VFXBattle
     }
     #endregion
 }
+
