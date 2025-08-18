@@ -6,30 +6,30 @@ using UnityEngine;
 #region Enum
 public enum SkillTag
 { 
-    None = 0,              // ¾øÀ½
-    Attack = 1 << 0,        // °ø°İ
-    Support = 1 << 1,       // º¸Á¶
-    Ailment = 1 << 2,       // »óÅÂÀÌ»ó
-    Projectile = 1 << 3,    // Åõ»çÃ¼
-    Area = 1 << 4,          // ¹üÀ§
-    Physic = 1 << 5,        // ¹°¸®
-    Fire = 1 << 6,          // È­¿°
-    Cold = 1 << 7,          // ³Ã±â
-    Lightning = 1 << 8,     // Àü±â
-    Void = 1 << 9,          // °øÇã
-    Duration = 1 << 10,     // Áö¼Ó
-    Creation = 1 << 11,     // »ı¼º
-    Passive = 1 << 12,      // º¸À¯È¿°ú
-    Landing = 1 << 13,      // ¼³Ä¡
-    Summon = 1 << 14,       // ¼ÒÈ¯
+    None = 0,              // ì—†ìŒ
+    Attack = 1 << 0,        // ê³µê²©
+    Support = 1 << 1,       // ë³´ì¡°
+    Ailment = 1 << 2,       // ìƒíƒœì´ìƒ
+    Projectile = 1 << 3,    // íˆ¬ì‚¬ì²´
+    Area = 1 << 4,          // ë²”ìœ„
+    Physic = 1 << 5,        // ë¬¼ë¦¬
+    Fire = 1 << 6,          // í™”ì—¼
+    Cold = 1 << 7,          // ëƒ‰ê¸°
+    Lightning = 1 << 8,     // ì „ê¸°
+    Void = 1 << 9,          // ê³µí—ˆ
+    Duration = 1 << 10,     // ì§€ì†
+    Creation = 1 << 11,     // ìƒì„±
+    Passive = 1 << 12,      // ë³´ìœ íš¨ê³¼
+    Landing = 1 << 13,      // ì„¤ì¹˜
+    Summon = 1 << 14,       // ì†Œí™˜
 
     End = 14
 }
 
 public enum SkillUseType 
 { 
-    Active,     // ¾×Æ¼ºê
-    Passive,    // ÆĞ½Ãºê
+    Active,     // ì•¡í‹°ë¸Œ
+    Passive,    // íŒ¨ì‹œë¸Œ
     End 
 }
 
@@ -41,27 +41,27 @@ public enum SkillCastType
 
 public enum SkillCommonAbilityType
 {
-    Energy_Use,     // ¿¡³ÊÁö ¼Ò¸ğ·®
-    Cooldown,       // Àç»ç¿ë ´ë±â½Ã°£
+    Energy_Use,     // ì—ë„ˆì§€ ì†Œëª¨ëŸ‰
+    Cooldown,       // ì¬ì‚¬ìš© ëŒ€ê¸°ì‹œê°„
     //--------------------------------------------------
-    Use_Spd,        // »ç¿ë ¼Óµµ
-    Aoe,            // ¹üÀ§
-    Dur,            // Áö¼Ó ½Ã°£
-    Dot,            // Áö¼Ó ÇÇÇØ
+    Use_Spd,        // ì‚¬ìš© ì†ë„
+    Aoe,            // ë²”ìœ„
+    Dur,            // ì§€ì† ì‹œê°„
+    Dot,            // ì§€ì† í”¼í•´
     //--------------------------------------------------
-    Proj_Angle,     // Åõ»çÃ¼ ¹ß»ç°¢µµ
-    Proj_Spd,       // Åõ»çÃ¼ ¼Óµµ
+    Proj_Angle,     // íˆ¬ì‚¬ì²´ ë°œì‚¬ê°ë„
+    Proj_Spd,       // íˆ¬ì‚¬ì²´ ì†ë„
     //--------------------------------------------------
-    Hit_Cnt,        // Å¸°İ È½¼ö
+    Hit_Cnt,        // íƒ€ê²© íšŸìˆ˜
     End,
 }
 
 public enum ActionVFXType
 {
-    Begin,          // »ç¿ë Á÷ÈÄ ³ª¿À´Â ÀÌÆåÆ®
-    Main,           // ¸ŞÀÎÀÌ µÇ´Â ÀÌÆåÆ®
-    Extra,          // Ãß°¡·Î ÇÊ¿äÇÑ ÀÌÆåÆ®
-    Hit,            // ÇÇ°İ, ³¡³¯ ¶§ ³ª¿À´Â ÀÌÆåÆ®
+    Begin,          // ì‚¬ìš© ì§í›„ ë‚˜ì˜¤ëŠ” ì´í™íŠ¸
+    Main,           // ë©”ì¸ì´ ë˜ëŠ” ì´í™íŠ¸
+    Extra,          // ì¶”ê°€ë¡œ í•„ìš”í•œ ì´í™íŠ¸
+    Hit,            // í”¼ê²©, ëë‚  ë•Œ ë‚˜ì˜¤ëŠ” ì´í™íŠ¸
     End
 }
 #endregion
@@ -106,7 +106,7 @@ public class AttackDB
 }
 
 
-// ½Ç½Ã°£À¸·Î »ç¿ëµÉ ½ºÅ³ Á¤º¸
+// ì‹¤ì‹œê°„ìœ¼ë¡œ ì‚¬ìš©ë  ìŠ¤í‚¬ ì •ë³´
 public class SkillDB_Cur
 {
     //----------------------------------------------------------------------------------------------------
@@ -150,9 +150,9 @@ public class SkillDB_Cur
     #endregion
 
     #region Ability Fields
-    public SkillAbilityGroup_Common[] CommonAbilityGroups { get; set; }             // ½ºÅ³µéÀÌ °øÅëÀ¸·Î °¡Áö´Â ´É·ÂÄ¡
-    public SkillAbilityGroup_Unique UniqueAbilityGroup { get; set; } = new();       // ¿ø·¡ ½ºÅ³ °íÀ¯ÀÇ ´É·ÂÄ¡
-    public SkillAbilityGroup_Unique CorestoneAbilityGroup { get; set; } = new();    // ÄÚ¾î½ºÅæ ´É·ÂÄ¡
+    public SkillAbilityGroup_Common[] CommonAbilityGroups { get; set; }             // ìŠ¤í‚¬ë“¤ì´ ê³µí†µìœ¼ë¡œ ê°€ì§€ëŠ” ëŠ¥ë ¥ì¹˜
+    public SkillAbilityGroup_Unique UniqueAbilityGroup { get; set; } = new();       // ì›ë˜ ìŠ¤í‚¬ ê³ ìœ ì˜ ëŠ¥ë ¥ì¹˜
+    public SkillAbilityGroup_Unique CorestoneAbilityGroup { get; set; } = new();    // ì½”ì–´ìŠ¤í†¤ ëŠ¥ë ¥ì¹˜
     #endregion
 
     #region Property Fields
@@ -213,7 +213,7 @@ public class SkillDB_Cur
     }
 
     /// <summary>
-    /// ÀåÂøµÈ ÄÚ¾î½ºÅæ ´É·ÂÄ¡¿¡ ÀÇÇØ ¿µÇâ ¹Ş´ÂÁö È®ÀÎÇÏ±â À§ÇØ »ç¿ëÇÔ.
+    /// ì¥ì°©ëœ ì½”ì–´ìŠ¤í†¤ ëŠ¥ë ¥ì¹˜ì— ì˜í•´ ì˜í–¥ ë°›ëŠ”ì§€ í™•ì¸í•˜ê¸° ìœ„í•´ ì‚¬ìš©í•¨.
     /// </summary>
     /// <param name="groupType"></param>
     /// <param name="detailType"></param>
@@ -241,7 +241,7 @@ public class SkillDB_Cur
     #endregion
 
     #region Ability Methods
-    public void Add_UniqueAbility(Ability_GroupType groupType, ObscuredInt detailType, SkillAbilityUnique skillAbilityUnique)
+    public void AddUniqueAbility(Ability_GroupType groupType, ObscuredInt detailType, SkillAbilityUnique skillAbilityUnique)
     {
         if (UniqueAbilityGroup.CheckContain(groupType, detailType))
             UniqueAbilityGroup.Add(groupType, detailType, skillAbilityUnique);
@@ -250,7 +250,7 @@ public class SkillDB_Cur
             UniqueAbilityGroup.Insert(groupType, detailType, skillAbilityUnique);
     }
 
-    public void Add_UniqueAbility(Ability_GroupType groupType, ObscuredInt detailType, SkillAbilityUnique skillAbilityUnique, Ability_ValueType abilityValueType, Ability_ValueType targetAbiliyValueType)
+    public void AddUniqueAbility(Ability_GroupType groupType, ObscuredInt detailType, SkillAbilityUnique skillAbilityUnique, Ability_ValueType abilityValueType, Ability_ValueType targetAbiliyValueType)
     {
         if (UniqueAbilityGroup.CheckContain(groupType, detailType))
             UniqueAbilityGroup.Add(groupType, detailType, skillAbilityUnique, abilityValueType, targetAbiliyValueType);
@@ -259,24 +259,24 @@ public class SkillDB_Cur
             UniqueAbilityGroup.Insert(groupType, detailType, skillAbilityUnique);
     }
 
-    public void Remove_UniqueAbility(Ability_GroupType groupType, ObscuredInt detailType, SkillAbilityUnique skillAbilityUnique, Ability_ValueType abilityValueType, Ability_ValueType targetAbiliyValueType)
+    public void RemoveUniqueAbility(Ability_GroupType groupType, ObscuredInt detailType, SkillAbilityUnique skillAbilityUnique, Ability_ValueType abilityValueType, Ability_ValueType targetAbiliyValueType)
     {
         UniqueAbilityGroup.Remove(groupType, detailType, skillAbilityUnique, abilityValueType, targetAbiliyValueType);
     }
 
-    public void Remove_UniqueAbility(Ability_GroupType groupType, ObscuredInt detailType, SkillAbilityUnique skillAbilityUnique)
+    public void RemoveUniqueAbility(Ability_GroupType groupType, ObscuredInt detailType, SkillAbilityUnique skillAbilityUnique)
     {
         UniqueAbilityGroup.Remove(groupType, detailType, skillAbilityUnique);
     }
 
-    public void Add_UniqueAbilityPerValue(SkillDB_Server serverDB, ObscuredInt reinforceLv)
+    public void AddUniqueAbilityPerValue(SkillDB_Server serverDB, ObscuredInt reinforceLv)
     {
-        UniqueAbilityGroup.Add_PerValue(serverDB, reinforceLv);
+        UniqueAbilityGroup.AddPerValue(serverDB, reinforceLv);
     }
 
-    public void Remove_UniqueAbilityPerValue(SkillDB_Server serverDB, ObscuredInt reinforceLv)
+    public void RemoveUniqueAbilityPerValue(SkillDB_Server serverDB, ObscuredInt reinforceLv)
     {
-        UniqueAbilityGroup.Remove_PerValue(serverDB, reinforceLv);
+        UniqueAbilityGroup.RemovePerValue(serverDB, reinforceLv);
     }
     #endregion
 
@@ -318,7 +318,7 @@ public class SkillDB_Cur
     #endregion
 }
 
-// ¼­¹ö¿¡¼­ ºÒ·¯¿Ã ½ºÅ³ Á¤º¸
+// ì„œë²„ì—ì„œ ë¶ˆëŸ¬ì˜¬ ìŠ¤í‚¬ ì •ë³´
 public class SkillDB_Server : ItemDB
 {
     //----------------------------------------------------------------------------------------------------
@@ -371,7 +371,7 @@ public class SkillDB_Server : ItemDB
     #endregion
 }
 
-// ¼­¹ö¿¡ ÀúÀåÇÒ Á¤º¸
+// ì„œë²„ì— ì €ì¥í•  ì •ë³´
 public class SkillDB_Save
 {
     //----------------------------------------------------------------------------------------------------
@@ -397,7 +397,7 @@ public class SkillDB_Save
     #region Add Methods
     public void AddReinforceLv(ObscuredInt reinforceLv) { ReinforceLv += reinforceLv; }
     public void AddWakeningLv(ObscuredInt awakeningLv) { AwakeningLv += awakeningLv; }
-    public ObscuredBool Add_HoldCnt(ObscuredInt _addCount)
+    public ObscuredBool AddHoldCnt(ObscuredInt _addCount)
     {
         ObscuredBool isUnlock = false;
         if (_addCount != 0)
@@ -438,7 +438,7 @@ public class SkillDB_Save
     #endregion
 }
 
-// ½ºÅ³ ÇÁ¸®ÆÕ, Scriptable Object
+// ìŠ¤í‚¬ í”„ë¦¬íŒ¹, Scriptable Object
 public abstract class SkillPrefab : ScriptableObject
 {
     //----------------------------------------------------------------------------------------------------
@@ -548,4 +548,5 @@ public abstract class SkillPrefab : ScriptableObject
         _coroutine = null;
     }
     #endregion
+
 }
