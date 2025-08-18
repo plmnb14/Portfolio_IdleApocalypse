@@ -51,9 +51,9 @@ public class UISlotQuickSkill : UISlotSkillBase, IPointerClickHandler
         SetUp_OnAwake();
     }
 
-    protected override void SetUp_OnAwake()
+    protected override void SetUpOnAwake()
     {
-        base.SetUp_OnAwake();
+        base.SetUpOnAwake();
 
         isUpdateImages = false;
         slotIcon.sprite = null;
@@ -64,7 +64,7 @@ public class UISlotQuickSkill : UISlotSkillBase, IPointerClickHandler
 
         if(corePresetIdxUI != null)
         {
-            corePresetIdxUI.Set_Digit(0);
+            corePresetIdxUI.SetDigit(0);
             corePresetIdxUI.ActivateObject(false);
         }
     }
@@ -241,5 +241,6 @@ public class UISlotQuickSkill : UISlotSkillBase, IPointerClickHandler
     }
     #endregion
 }
+
 
 
