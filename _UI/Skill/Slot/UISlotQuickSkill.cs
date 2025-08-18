@@ -19,7 +19,7 @@ public class UISlotQuickSkill : UISlotSkillBase, IPointerClickHandler
     //----------------------------------------------------------------------------------------------------
     #region Serialize Fields
     [Space]
-    [Header("½ºÅ³ Äü ½½·Ô (Skill Quick Slot)")]
+    [Header("ìŠ¤í‚¬ í€µ ìŠ¬ë¡¯ (Skill Quick Slot)")]
     [SerializeField] protected UISkillCooldownGroup skillCooldownGroupUI;
     [SerializeField] protected Image highlightIcon;
     [SerializeField] protected Image manualPressHighLightImg;
@@ -241,3 +241,4 @@ public class UISlotQuickSkill : UISlotSkillBase, IPointerClickHandler
     }
     #endregion
 }
+
