@@ -1,3 +1,6 @@
+// 우편 Manager 입니다.
+// 유저 로그인 우편 목록 1회 갱신 후, 별도의 우편 콜백이 있을 때까지 우편을 불러오지 않도록 설정했습니다.
+
 using BackEnd;
 using System.Collections.Generic;
 using UnityEngine;
@@ -296,7 +299,7 @@ public class PostBoxManager : Singleton<PostBoxManager>
         }
 
         else
-            Debug.Log($"�����߽��ϴ�. : {className} / {functionName} / {errorInfo}");
+            Debug.Log($"실패했습니다. : {className} / {functionName} / {errorInfo}");
     }
 
     private void NextStepActive(ObscuredBool isSuccess, string className, string functionName, string errorInfo)
@@ -317,7 +320,7 @@ public class PostBoxManager : Singleton<PostBoxManager>
         }
 
         else
-            Debug.Log($"�����߽��ϴ�. : {className} / {functionName} / {errorInfo}");
+            Debug.Log($"실패했습니다. : {className} / {functionName} / {errorInfo}");
     }
 
     private void NextStepOnlyRefresh(ObscuredBool isSuccess, string className, string functionName, string errorInfo)
@@ -332,7 +335,7 @@ public class PostBoxManager : Singleton<PostBoxManager>
         }
 
         else
-            Debug.Log($"�����߽��ϴ�. : {className} / {functionName} / {errorInfo}");
+            Debug.Log($"실패했습니다. : {className} / {functionName} / {errorInfo}");
     }
 
     private void ToggleReceiveAllButtonUI()
@@ -607,4 +610,5 @@ public class UPostChartItem
         $"| itemCount : {ItemCount}\n";
     }
     #endregion
+
 }
