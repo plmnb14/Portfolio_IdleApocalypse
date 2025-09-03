@@ -1,6 +1,7 @@
 //----------------------------------------------------------------------------------------------------
-// Scriptable Object (SkillPrefab) 기반 스킬 파이프 라인 (시전 -> 효과 실행 -> 관련 VFX 스폰 / 연출)
 // SkillPrefab을 상속받아 스킬 효과/연출한 Class 입니다.
+//
+// Scriptable Object (SkillPrefab) 기반 스킬 파이프 라인 (시전 -> 효과 실행 -> 관련 VFX 스폰 / 연출)
 // Skill 능력치에 따라 Scale, AnimationSpeed, 이펙트 개수가 다르게 나오도록 설정했습니다.
 //----------------------------------------------------------------------------------------------------
 using CodeStage.AntiCheat.ObscuredTypes;
@@ -85,4 +86,5 @@ public class SkillActive_GlacialCascade : SkillPrefab
         }
     }
 }
+
 
