@@ -1,6 +1,9 @@
+//----------------------------------------------------------------------------------------------------
 // 몬스터를 관리하는 Manager 입니다.
+//
 // 원본 Prefab, Pooling Monster Object 그리고 인스턴스화된 몬스터들을 관리합니다.
 // 몬스터 소환 시 사전에 설정된 타입, 접두어 유무, 스테이지 별 설정 능력치를 반영해 몬스터 능력치를 결정합니다.
+//----------------------------------------------------------------------------------------------------
 
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
@@ -529,3 +532,4 @@ public class MonsterManager : Singleton<MonsterManager>
     #endregion
 
 }
+
