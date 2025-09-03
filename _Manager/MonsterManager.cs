@@ -1,3 +1,7 @@
+// ëª¬ìŠ¤í„°ë¥¼ ê´€ë¦¬í•˜ëŠ” Manager ì…ë‹ˆë‹¤.
+// ì›ë³¸ Prefab, Pooling Monster Object ê·¸ë¦¬ê³  ì¸ìŠ¤í„´ìŠ¤í™”ëœ ëª¬ìŠ¤í„°ë“¤ì„ ê´€ë¦¬í•©ë‹ˆë‹¤.
+// ëª¬ìŠ¤í„° ì†Œí™˜ ì‹œ ì‚¬ì „ì— ì„¤ì •ëœ íƒ€ì…, ì ‘ë‘ì–´ ìœ ë¬´, ìŠ¤í…Œì´ì§€ ë³„ ì„¤ì • ëŠ¥ë ¥ì¹˜ë¥¼ ë°˜ì˜í•´ ëª¬ìŠ¤í„° ëŠ¥ë ¥ì¹˜ë¥¼ ê²°ì •í•©ë‹ˆë‹¤.
+
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +21,7 @@ public class MonsterManager : Singleton<MonsterManager>
     // Fields
     //----------------------------------------------------------------------------------------------------
     #region Serialize Fields
-    [Header(" - ¸ó½ºÅÍ ¼ÒÈ¯ ¹üÀ§")]
+    [Header(" - ëª¬ìŠ¤í„° ì†Œí™˜ ë²”ìœ„")]
     [SerializeField] private Vector2 monsterSummonYRange = new();
     [SerializeField] private float summonDistanceX = 2.0f;
     #endregion
@@ -203,17 +207,17 @@ public class MonsterManager : Singleton<MonsterManager>
     {
         _currentSummonCnt = 0;
 
-        // ÇöÀç ¿şÀÌºê ÀÎµ¦½º
+        // í˜„ì¬ ì›¨ì´ë¸Œ ì¸ë±ìŠ¤
         ObscuredInt waveIndex = StageManager.Instance.CurWaveIdx;
 
-        // ÇöÀç ¿şÀÌºê¿¡ ¼ÒÈ¯µÉ Àû Å¸ÀÔ °³¼ö
+        // í˜„ì¬ ì›¨ì´ë¸Œì— ì†Œí™˜ë  ì  íƒ€ì… ê°œìˆ˜
         ObscuredInt waveEnemyCnt = stageDB.enemy_NamesPerWave[waveIndex].Length;
 
-        // ÇöÀç ¸ó½ºÅÍ ÃÖ´ë °³¼ö
+        // í˜„ì¬ ëª¬ìŠ¤í„° ìµœëŒ€ ê°œìˆ˜
         ObscuredInt maxEnemyCnt = StageManager.Instance.CurStageDB.GetWaveMaxEnemyCnt(waveIndex);
         _currentSummonCnt = maxEnemyCnt;
 
-        // ¸ó½ºÅÍ HP¹Ù ¼³Á¤ÇØ¾ßµÊ
+        // ëª¬ìŠ¤í„° HPë°” ì„¤ì •í•´ì•¼ë¨
         var hpBarMgr = SliderBarUIManager.Instance;
         var stageMgr = StageManager.Instance;
         for (var i = 0; i < waveEnemyCnt; i++)
@@ -242,14 +246,14 @@ public class MonsterManager : Singleton<MonsterManager>
                 if (stageMgr.IsChangingMap)
                     yield break;
 
-                // ¸ó½ºÅÍ ºÒ·¯¿À±â
+                // ëª¬ìŠ¤í„° ë¶ˆëŸ¬ì˜¤ê¸°
                 Monster monster = GetMonster(enemyName);
 
-                // ±âº» ¼³Á¤
+                // ê¸°ë³¸ ì„¤ì •
                 monster.CurEntityGradeType = enemyType;
                 SetMonsterAbility(monster, enemyLevel, stageDB);
 
-                // ³ë¸», º¸½º Â÷ÀÌ
+                // ë…¸ë§, ë³´ìŠ¤ ì°¨ì´
                 ObscuredFloat scaleRatio = 1.0f;
                 ObscuredFloat lifeRatio = 1.0f;
                 ObscuredFloat randomY;
@@ -272,7 +276,7 @@ public class MonsterManager : Singleton<MonsterManager>
                         monster.InstanceEntityAbility.IsInvincible = true;
                     }
 
-                    // ÀÏ¹İ ½ºÅ×ÀÌÁö/ ´øÀüÀÇ º¸½º
+                    // ì¼ë°˜ ìŠ¤í…Œì´ì§€/ ë˜ì „ì˜ ë³´ìŠ¤
                     else
                     {
                         scaleRatio = LocalDB_Enemy.BOSS_SCALE_RATIO;
@@ -309,19 +313,19 @@ public class MonsterManager : Singleton<MonsterManager>
                     randomY = stageMgr.PlayerSummonPosition.y;
                 }
 
-                // ¹èÀ² ¼³Á¤
+                // ë°°ìœ¨ ì„¤ì •
                 monster.SetScaleRatio(scaleRatio);
                 monster.InstanceEntityAbility.lifeRatio = lifeRatio;
 
-                // ÀÎ½ºÅÏ½º ´É·ÂÄ¡ ¼³Á¤
+                // ì¸ìŠ¤í„´ìŠ¤ ëŠ¥ë ¥ì¹˜ ì„¤ì •
                 monster.InstanceEntityAbility.SetAbilityValue(
                     AbilityType_Instance.Life,
                     monster.CurEntityAbility[AbilityType_Entity.LifePoint_Final]);
 
-                // À§Ä¡ ¼³Á¤
+                // ìœ„ì¹˜ ì„¤ì •
                 monster.transform.position = new Vector3(summonDistanceX, randomY, 0.0f);
 
-                // HP¹Ù ¼³Á¤
+                // HPë°” ì„¤ì •
                 monster.SetUpHpBar(hpBar);
                 if (enemyType == EntityGradeType.Boss || enemyType == EntityGradeType.Elite)
                 {
@@ -332,7 +336,7 @@ public class MonsterManager : Singleton<MonsterManager>
                 monster.StartSummoning();
                 monster.StartForceSummon();
 
-                // ÀÎ½ºÅÏ½º ¸®½ºÆ®¿¡ ¼ÒÈ¯
+                // ì¸ìŠ¤í„´ìŠ¤ ë¦¬ìŠ¤íŠ¸ì— ì†Œí™˜
                 _instanceMonsterList.Add(monster);
 
                 OnUpdatedEnemyCount?.Invoke(_instanceMonsterList.Count);
@@ -523,4 +527,5 @@ public class MonsterManager : Singleton<MonsterManager>
         }
     }
     #endregion
+
 }
