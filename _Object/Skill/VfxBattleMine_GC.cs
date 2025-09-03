@@ -2,6 +2,7 @@
 // SkillPrefab에서 생성된 Skill 고유 이펙트 입니다.
 //
 // 각각 고유 효과/연출을 보일 수 있게 설계했습니다.
+// 해당 VFX는 스킬 사용 후 설치되는 지뢰(Mine) 형태의 스킬로, 지뢰 설치 후 지뢰발동 시 추가 스킬 이펙트가 발동되는 형태입니다.
 //----------------------------------------------------------------------------------------------------
 
 using CodeStage.AntiCheat.ObscuredTypes;
@@ -92,5 +93,6 @@ public class VfxBattleMine_GC : VfxBattleMine
     }
     #endregion
 }
+
 
 
