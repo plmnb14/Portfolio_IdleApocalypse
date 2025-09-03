@@ -1,6 +1,8 @@
-
-// Scriptable ±â¹Ý ½ºÅ³ ÆÄÀÌÇÁ ¶óÀÎ (½ÃÀü -> È¿°ú ½ÇÇà -> °ü·Ã VFX ½ºÆù / ¿¬Ãâ
-
+//----------------------------------------------------------------------------------------------------
+// Scriptable Object (SkillPrefab) ê¸°ë°˜ ìŠ¤í‚¬ íŒŒì´í”„ ë¼ì¸ (ì‹œì „ -> íš¨ê³¼ ì‹¤í–‰ -> ê´€ë ¨ VFX ìŠ¤í° / ì—°ì¶œ)
+// SkillPrefabì„ ìƒì†ë°›ì•„ ìŠ¤í‚¬ íš¨ê³¼/ì—°ì¶œí•œ Class ìž…ë‹ˆë‹¤.
+// Skill ëŠ¥ë ¥ì¹˜ì— ë”°ë¼ Scale, AnimationSpeed, ì´íŽ™íŠ¸ ê°œìˆ˜ê°€ ë‹¤ë¥´ê²Œ ë‚˜ì˜¤ë„ë¡ ì„¤ì •í–ˆìŠµë‹ˆë‹¤.
+//----------------------------------------------------------------------------------------------------
 using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEngine;
 
@@ -43,13 +45,13 @@ public class SkillActive_GlacialCascade : SkillPrefab
             distance > maxXgap ? maxXgap :
             distance < minXgap ? minXgap : distance;
 
-        // ¼³Ä¡ °³¼ö
+        // ì„¤ì¹˜ ê°œìˆ˜
         ObscuredInt maxLandCnt = (int)battleDB_Skill.CurUserSkillDB.UniqueAbilityGroup.GetAbilityValue(
             Ability_GroupType.Skill,
             (int)AbilityType_Skill.Object_Land_Cnt,
             Ability_ValueType.Value);
 
-        // ¼³Ä¡ ¼Óµµ
+        // ì„¤ì¹˜ ì†ë„
         var finalThrowSpeed =
             battleDB_Skill.CurUserSkillDB.UniqueAbilityGroup.CheckContain(Ability_GroupType.Skill, (int)AbilityType_Skill.Object_ThrowLand_Spd) ?
             (float)battleDB_Skill.CurUserSkillDB.UniqueAbilityGroup.GetAbilityValue(
@@ -83,3 +85,4 @@ public class SkillActive_GlacialCascade : SkillPrefab
         }
     }
 }
+
