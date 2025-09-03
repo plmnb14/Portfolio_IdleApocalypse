@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------------------
+// 스킬과 관련된 Class 들입니다.
+// AttackDB : 공격 정보를 담은 Class 입니다.
+// SklillDB_Cur :
+// SkillDB_Save :
+// SkillDB_Server : 
+// SkillPrefab :
+//----------------------------------------------------------------------------------------------------
+
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -26,18 +35,8 @@ public enum SkillTag
     End = 14
 }
 
-public enum SkillUseType 
-{ 
-    Active,     // 액티브
-    Passive,    // 패시브
-    End 
-}
-
-public enum SkillCastType
-{
-    Self, Shooter, Droid, Land,
-    End
-}
+public enum SkillUseType { Active, Passive, End }
+public enum SkillCastType { Self, Shooter, Droid, Land, End }
 
 public enum SkillCommonAbilityType
 {
@@ -66,6 +65,7 @@ public enum ActionVFXType
 }
 #endregion
 
+// 공격 정보를 담는 클래스 입니다.
 public class AttackDB
 {
     //----------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ public class AttackDB
     public ObscuredFloat AttackRange { get; set; } = 1.0f;
     public ObscuredFloat Cooldown { get; set; } = 0.5f;
     //
-    public ObscuredInt PhaseIndex = 0;
+    public ObscuredInt PhaseIndex;
     public ObscuredFloat ScaleRatio = 1.0f;
     #endregion
 
@@ -354,7 +354,6 @@ public class SkillDB_Server : ItemDB
     #region Bool Fields
     public List<KeyValuePair<Ability_GroupType, ObscuredInt>> TextShowList { get; set; } = new();
     public List<KeyValuePair<Ability_GroupType, ObscuredInt>> DefaultAbilityList { get; set; } = new();
-    //public List<ObscuredInt> enableAbilityList = new();
     #endregion
 
     //----------------------------------------------------------------------------------------------------
@@ -550,3 +549,4 @@ public abstract class SkillPrefab : ScriptableObject
     #endregion
 
 }
+
