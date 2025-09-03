@@ -1,3 +1,8 @@
+//----------------------------------------------------------------------------------------------------
+// UI 클래스 예시입니다.
+// 스킬 퀵슬롯 UI Class이며 수동/자동으로 사용되는 스킬 아이콘을 표시합니다.
+//----------------------------------------------------------------------------------------------------
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -241,6 +246,7 @@ public class UISlotQuickSkill : UISlotSkillBase, IPointerClickHandler
     }
     #endregion
 }
+
 
 
 
