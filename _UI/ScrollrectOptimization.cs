@@ -1,5 +1,9 @@
-
-// ScrollRect¿¡¼­ º¸ÀÌ´Â Ç×¸ñ¸¸ È°¼ºÈ­ÇØ Canvas Rebuild ¹× ¿À¹öÇìµå ÁÙÀÌ´Â ¸ñÀû
+//----------------------------------------------------------------------------------------------------
+// ê°€ë¡œ, ì„¸ë¡œ ScrollRect ìµœì í™”ë¥¼ ìœ„í•œ Class ì…ë‹ˆë‹¤.
+//
+// ScrollRectì—ì„œ ë³´ì´ëŠ” í•­ëª©ë§Œ í™œì„±í™”í•´ Canvas Rebuild ë° ì˜¤ë²„í—¤ë“œ ì¤„ì´ëŠ” ê²ƒì´ ëª©ì ì…ë‹ˆë‹¤.
+// í•œ ì¤„ì— ë³´ì´ëŠ” ê°œìˆ˜(countInGroup)ì„ ì„¤ì •í•´ ë°˜ë³µ ì—°ì‚°ëŸ‰ì„ ì¤„ì˜€ìŠµë‹ˆë‹¤.
+//----------------------------------------------------------------------------------------------------
 
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections.Generic;
@@ -27,21 +31,21 @@ public static class ScrollRectOptimization
             var targetHeight = obj.MyRectTransform.rect.height;
             if (rectPosition > scrollRect.viewport.rect.yMax + targetHeight)
             {
-                // ½ºÅ©·Ñ ¿µ¿ªº¸´Ù À§¿¡ ÀÖ°í, È°¼ºÈ­ µÇ¾î ÀÖÀ» ¶§
+                // ìŠ¤í¬ë¡¤ ì˜ì—­ë³´ë‹¤ ìœ„ì— ìˆê³ , í™œì„±í™” ë˜ì–´ ìˆì„ ë•Œ
                 if (obj.IsActiveComponents)
                     obj.ActivateObject(false);
             }
 
             else if (rectPosition < scrollRect.viewport.rect.yMin - targetHeight)
             {
-                // ½ºÅ©·Ñ ¿µ¿ªº¸´Ù ¾Æ·¡¿¡ ÀÖ°í, È°¼ºÈ­ µÇ¾î ÀÖÀ» ¶§
+                // ìŠ¤í¬ë¡¤ ì˜ì—­ë³´ë‹¤ ì•„ë˜ì— ìˆê³ , í™œì„±í™” ë˜ì–´ ìˆì„ ë•Œ
                 if (obj.IsActiveComponents)
                 {
                     isDeactiveAll = true;
                     obj.ActivateObject(false);
                 }
             }
-            // »ç°¢Çü ³»ºÎ¿¡ ÀÖ°í ºñÈ°¼ºÈ­ »óÅÂÀÌ¸é
+            // ì‚¬ê°í˜• ë‚´ë¶€ì— ìˆê³  ë¹„í™œì„±í™” ìƒíƒœì´ë©´
             else if (!obj.IsActiveComponents)
             {
                 obj.ActivateObject(true);
@@ -63,7 +67,7 @@ public static class ScrollRectOptimization
             var targetHeight = UIObjects[i].MyRectTransform.rect.height * 0.5f;
             if (rectPosition > scrollRect.viewport.rect.yMax + targetHeight)
             {
-                // ½ºÅ©·Ñ ¿µ¿ªº¸´Ù À§¿¡ ÀÖ°í, È°¼ºÈ­ µÇ¾î ÀÖÀ» ¶§
+                // ìŠ¤í¬ë¡¤ ì˜ì—­ë³´ë‹¤ ìœ„ì— ìˆê³ , í™œì„±í™” ë˜ì–´ ìˆì„ ë•Œ
                 if (UIObjects[i].IsActiveComponents)
                 {
                     int end = Mathf.Min(i + countInGroup - 1, UIObjects.Length - 1);
@@ -75,14 +79,14 @@ public static class ScrollRectOptimization
             }
             else if (rectPosition < scrollRect.viewport.rect.yMin - targetHeight)
             {
-                // ½ºÅ©·Ñ ¿µ¿ªº¸´Ù ¾Æ·¡¿¡ ÀÖ°í, È°¼ºÈ­ µÇ¾î ÀÖÀ» ¶§
+                // ìŠ¤í¬ë¡¤ ì˜ì—­ë³´ë‹¤ ì•„ë˜ì— ìˆê³ , í™œì„±í™” ë˜ì–´ ìˆì„ ë•Œ
                 if (UIObjects[i].IsActiveComponents)
                 {
                     DeactiveAll(UIObjects, i, loopCnt);
                     break;
                 }
             }
-            // »ç°¢Çü ³»ºÎ¿¡ ÀÖ°í ºñÈ°¼ºÈ­ »óÅÂÀÌ¸é
+            // ì‚¬ê°í˜• ë‚´ë¶€ì— ìˆê³  ë¹„í™œì„±í™” ìƒíƒœì´ë©´
             else if(!UIObjects[i].IsActiveComponents)
             {
                 showedSlotIndexList.Add(i);
@@ -97,7 +101,7 @@ public static class ScrollRectOptimization
                 continue;
             }
 
-            // »ç°¢Çü ³»ºÎ¿¡ ÀÖ°í È°¼ºÈ­ »óÅÂÀÌ¸é
+            // ì‚¬ê°í˜• ë‚´ë¶€ì— ìˆê³  í™œì„±í™” ìƒíƒœì´ë©´
             else if(UIObjects[i].IsActiveComponents)
             {
                 showedSlotIndexList.Add(i);
@@ -123,7 +127,7 @@ public static class ScrollRectOptimization
             var targetWidth = UIObjects[i].MyRectTransform.rect.width * 0.5f;
             if (rectPosition > scrollRect.viewport.rect.xMax + targetWidth)
             {
-                // ½ºÅ©·Ñ ¿µ¿ªº¸´Ù ¿À¸¥ÂÊ¿¡ ÀÖ°í, È°¼ºÈ­ µÇ¾î ÀÖÀ» ¶§
+                // ìŠ¤í¬ë¡¤ ì˜ì—­ë³´ë‹¤ ì˜¤ë¥¸ìª½ì— ìˆê³ , í™œì„±í™” ë˜ì–´ ìˆì„ ë•Œ
                 if (UIObjects[i].IsActiveComponents)
                 {
                     int end = Mathf.Min(i + countInGroup - 1, UIObjects.Length - 1);
@@ -134,7 +138,7 @@ public static class ScrollRectOptimization
                 }
             }
 
-            // ½ºÅ©·Ñ¿µ¿ªº¸´Ù ¿ŞÂÊ, 
+            // ìŠ¤í¬ë¡¤ì˜ì—­ë³´ë‹¤ ì™¼ìª½, 
             else if(rectPosition < scrollRect.viewport.rect.xMin - targetWidth)
             {
                 if (UIObjects[i].IsActiveComponents)
@@ -143,7 +147,7 @@ public static class ScrollRectOptimization
 
             else
             {
-                // »ç°¢Çü ³»ºÎ¿¡ ÀÖ°í ºñÈ°¼ºÈ­ »óÅÂÀÌ¸é
+                // ì‚¬ê°í˜• ë‚´ë¶€ì— ìˆê³  ë¹„í™œì„±í™” ìƒíƒœì´ë©´
                 if (!UIObjects[i].IsActiveComponents)
                 {
                     showedSlotIndexList.Add(i);
@@ -174,3 +178,4 @@ public static class ScrollRectOptimization
     }
     #endregion
 }
+
