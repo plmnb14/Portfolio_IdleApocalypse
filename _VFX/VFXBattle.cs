@@ -1,3 +1,9 @@
+//----------------------------------------------------------------------------------------------------
+// 전투에 사용되는 VFX Class 입니다.
+//
+// 충돌/후처리 등 공통 기능을 지니고 있으며, 디테일한 부분은 자식 VFX에서 작성하도록 했습니다.
+//----------------------------------------------------------------------------------------------------
+
 using CodeStage.AntiCheat.ObscuredTypes;
 using System;
 using System.Collections;
@@ -276,5 +282,6 @@ public class VFXBattle : VFX
     public virtual void FuncAfterCharged(ObscuredBool boolen) { MyAnimator.SetBool("IsCharged", boolen); }
     #endregion
 }
+
 
 
