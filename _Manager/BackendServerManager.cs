@@ -1,5 +1,10 @@
-// ÀÌ ÆÄÀÏÀº Á¦Ãâ ÆíÀÇ¸¦ À§ÇØ ÀÏºÎ ±¸°£À» ¹ßÃéÇß½À´Ï´Ù.
-
+//----------------------------------------------------------------------------------------------------
+// ì´ íŒŒì¼ì€ ì œì¶œ í¸ì˜ë¥¼ ìœ„í•´ ì¼ë¶€ êµ¬ê°„ì„ ë°œì·Œí–ˆìŠµë‹ˆë‹¤.
+// ëª©ì  : ì„œë²„ ì´ˆê¸°í™”, ë²„ì „ ê´€ë¦¬, ì±„íŒ…/ê°•ê³ /ìŠ¤í† ì–´ ë“± ì™¸ë¶€ ì—°ë™ ì„¸íŒ…ì„ í†µí•© ê´€ë¦¬í•˜ëŠ” ë§¤ë‹ˆì € í´ë˜ìŠ¤
+// ì£¼ìš” ê¸°ëŠ¥
+// - ë’¤ë(Backend) SDK ì—°ë™ ë° ì„œë²„ ë¹Œë“œ ì „í™˜(ê°œë°œ/ë¼ì´ë¸Œ)
+// - ì•± ë²„ì „ ë™ê¸°í™” ë° ê°•ì œ ì—…ë°ì´íŠ¸ ì²˜ë¦¬ ë¡œì§ êµ¬í˜„
+//----------------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
@@ -10,31 +15,22 @@ using TheBackend.ToolKit.GoogleLogin.Settings.Android;
 using Firebase;
 using Firebase.Messaging;
 
-
 #region Enum
 public enum MyLogType 
 { 
     Equipment_WeaponGamble, Equipment_HelmetGamble, Equipment_BreastPlateGamble,
-    ArtifactGamble,
-    SkillGamble, CoreStoneGamble,
+    ArtifactGamble, SkillGamble, CoreStoneGamble,
     ArtifactReinforce,
 
     ReviewStatus,
 
-    PaidProductSuccessed, PaidProductFailed,
-    PaidProductRecieved,
+    PaidProductSuccessed, PaidProductFailed, PaidProductRecieved,
 
     MainQuestLine,
-
-    RaidComplate,
-    RaidSweepComplete,
-    DungeonComplete,
-    DungeonSweepComplete,
+    RaidComplate, RaidSweepComplete, DungeonComplete, DungeonSweepComplete,
 
     OfflineReward,
-    GoldRefund_202408,
-    CarvingRefund_202409,
-    AccessoryGamble,
+    GoldRefund_202408, CarvingRefund_202409, AccessoryGamble,
     End 
 }
 #endregion
@@ -45,41 +41,41 @@ public class BackendServerManager : Singleton<BackendServerManager>
     // Fields
     //----------------------------------------------------------------------------------------------------
     #region Serialize Fields
-    [Header("- [ºôµå : ¶óÀÌºê] ¶óÀÌºê ¼­¹ö È°¼ºÈ­")]
+    [Header("- [ë¹Œë“œ : ë¼ì´ë¸Œ] ë¼ì´ë¸Œ ì„œë²„ í™œì„±í™”")]
     [SerializeField] private bool isLiveBuild;
     [Space(10)]
-    [Header(" - [±¤°í : ¶óÀÌºê] Live AD")]
+    [Header(" - [ê´‘ê³  : ë¼ì´ë¸Œ] Live AD")]
     [SerializeField] private bool live_AdActivate;
     [Space(10)]
-    [Header("- [Â÷Æ®] °­Á¦·Î ¼­¹ö¿¡¼­ ¹Ş¾Æ¿À±â")]
+    [Header("- [ì°¨íŠ¸] ê°•ì œë¡œ ì„œë²„ì—ì„œ ë°›ì•„ì˜¤ê¸°")]
     [SerializeField] private bool force_LoadOnServer;
     [Space(10)]
-    [Header("- [ÀÌº¥Æ®] ÇöÀç ÁøÇàÁßÀÎ ÀÌº¥Æ®")]
+    [Header("- [ì´ë²¤íŠ¸] í˜„ì¬ ì§„í–‰ì¤‘ì¸ ì´ë²¤íŠ¸")]
     [SerializeField] private string[] activeEventIds;
     [Space(10)]
-    [Header("- [µÚ³¡] ¼­¹ö ¼¼ÆÃ")]
+    [Header("- [ë’¤ë] ì„œë²„ ì„¸íŒ…")]
     [SerializeField] private TheBackendSettings backendSettings;
     [SerializeField] private BackndChatSettings backendChatSettings;
     [SerializeField] private TheBackendGoogleSettingsForAndroid backendGoogleSettingsForAndroid;
     [Space(10)]
-    [Header("- [½ºÅä¾î] ½ºÅä¾î ¼¼ÆÃ")]
+    [Header("- [ìŠ¤í† ì–´] ìŠ¤í† ì–´ ì„¸íŒ…")]
     [SerializeField] private string playStoreURL;
     [SerializeField] private string appStoreURL;
     [SerializeField] private string oneStoreURL;
     [Space(10)]
-    [Header(" - [°³¹ßÀÚ] Develop Server")]
+    [Header(" - [ê°œë°œì] Develop Server")]
     [SerializeField] private string dev_ClientId;
     [SerializeField] private string dev_SignitureKey;
     [SerializeField] private string dev_ChatUUID;
     [SerializeField] private string dev_chartManagedFileId;
     [Space(10)]
-    [Header(" - [¶óÀÌºê] Live Server")]
+    [Header(" - [ë¼ì´ë¸Œ] Live Server")]
     [SerializeField] private string live_ClientId;
     [SerializeField] private string live_SignitureKey;
     [SerializeField] private string live_ChatUUID;
     [SerializeField] private string live_chartManagedFileId;
     [Space(10)]
-    [Header(" - [ÁÖ¼Ò] °ü·Ã ¸µÅ©")]
+    [Header(" - [ì£¼ì†Œ] ê´€ë ¨ ë§í¬")]
     [SerializeField] private string naverCafeURL;
     [SerializeField] private string serviceTermURL;
     [SerializeField] private string privircyTermURL;
@@ -88,41 +84,21 @@ public class BackendServerManager : Singleton<BackendServerManager>
     #region Property Fields
     public Queue<Action> MainThreadQueue { get; set; } = new();
     public ObscuredBool IsForcedLoadOnServer { get { return force_LoadOnServer; } }
-    public ObscuredBool IsCorrectVersion { get; private set; } = false;
-    public ObscuredBool IsRunningOnEditor { get; private set; } = false;
-    public ObscuredBool NeedReconnectServer { get; private set; } = false;
-    public ObscuredBool IsLiveAdActivate 
-    {
-        get { return live_AdActivate; }
-    }
+    public ObscuredBool IsCorrectVersion { get; private set; }
+    public ObscuredBool IsRunningOnEditor { get; private set; }
+    public ObscuredBool NeedReconnectServer { get; private set; }
+    public ObscuredBool IsLiveAdActivate { get { return live_AdActivate; } }
 
-
-    public ObscuredString ChartManagedFileId 
-    {
-        get { return isLiveBuild ? live_chartManagedFileId : dev_chartManagedFileId; }
-    }
-
-    public ObscuredString NaverCafeURL
-    {
-        get { return naverCafeURL; }
-    }
-
-    public ObscuredString ServiceTermURL
-    {
-        get { return serviceTermURL; }
-    }
-
-    public ObscuredString PrivircyTermURL
-    {
-        get { return privircyTermURL; }
-    }
-
+    public ObscuredString ChartManagedFileId { get { return isLiveBuild ? live_chartManagedFileId : dev_chartManagedFileId; } }
+    public ObscuredString NaverCafeURL { get { return naverCafeURL; } }
+    public ObscuredString ServiceTermURL { get { return serviceTermURL; } }
+    public ObscuredString PrivircyTermURL { get { return privircyTermURL; } }
     public string[] ActiveEventIds { get { return activeEventIds; } }
     #endregion
 
     #region Private Fields
     private TheBackend.ToolKit.InvalidFilter.FilterManager _filterMgr = new();
-    private ObscuredBool _setupOnTitleScene = false;
+    private ObscuredBool _setupOnTitleScene;
     #endregion
 
     //----------------------------------------------------------------------------------------------------
@@ -159,10 +135,10 @@ public class BackendServerManager : Singleton<BackendServerManager>
     private void InitLanguageFilter()
     {
         if(_filterMgr.LoadInvalidString())
-            Debug.Log("±İÁö¾î ÇÊÅÍ¸µ È°¼ºÈ­");
+            Debug.Log("ê¸ˆì§€ì–´ í•„í„°ë§ í™œì„±í™”");
 
         else
-            Debug.Log("±İÁö¾î ÇÊÅÍ¸µ ºñÈ°¼ºÈ­");
+            Debug.Log("ê¸ˆì§€ì–´ í•„í„°ë§ ë¹„í™œì„±í™”");
     }
     #endregion
 
@@ -170,20 +146,13 @@ public class BackendServerManager : Singleton<BackendServerManager>
     public void InitBackendServer(Action afterFunc)
     {
         var bro = Backend.Initialize();
-        var debugMessage = string.Empty;
         if(bro.IsSuccess())
         {
-            debugMessage = "µÚ³¡ ÃÖÃÊ ÃÊ±âÈ­ ¼º°ø!";
             Change_VersionText();
 
             SetUpOnStart();
             CheckAppVersion(afterFunc);
         }
-
-        else
-            debugMessage = "µÚ³¡ ÃÖÃÊ ÃÊ±âÈ­ ½ÇÆĞ!";
-
-        ServerDebugLog(bro, debugMessage);
     }
 
     private void Change_VersionText()
@@ -191,8 +160,8 @@ public class BackendServerManager : Singleton<BackendServerManager>
         TitleSceneManager.Instance.Update_VersionText(isLiveBuild ? Application.version : string.Format("[DEV] - {0}", Application.version));
     }
 
-    private const string NEED_UPDATE_MESSAGE = "¾÷µ¥ÀÌÆ®°¡ ÇÊ¿äÇÕ´Ï´Ù. \nÇÃ·¹ÀÌ½ºÅä¾î¿¡¼­ ¾÷µ¥ÀÌÆ®¸¦ ÁøÇà ÈÄ, Àç½ÇÇà ÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.";
-    private const string INCORRECT_VERSION_UPDATE_MESSAGE = "¹öÀüÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù. \nÇÃ·¹ÀÌ½ºÅä¾î¿¡¼­ ¾÷µ¥ÀÌÆ®¸¦ ÁøÇà ÈÄ, Àç½ÇÇà ÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.";
+    private const string NEED_UPDATE_MESSAGE = "ì—…ë°ì´íŠ¸ê°€ í•„ìš”í•©ë‹ˆë‹¤. \ní”Œë ˆì´ìŠ¤í† ì–´ì—ì„œ ì—…ë°ì´íŠ¸ë¥¼ ì§„í–‰ í›„, ì¬ì‹¤í–‰ í•´ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.";
+    private const string INCORRECT_VERSION_UPDATE_MESSAGE = "ë²„ì „ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. \ní”Œë ˆì´ìŠ¤í† ì–´ì—ì„œ ì—…ë°ì´íŠ¸ë¥¼ ì§„í–‰ í›„, ì¬ì‹¤í–‰ í•´ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.";
     public void CheckAppVersion(Action afterFunc)
     {
         var bro = Backend.Utils.GetLatestVersion();
@@ -204,17 +173,17 @@ public class BackendServerManager : Singleton<BackendServerManager>
             var serverVersion = new Version(version.GetDecrypted());
             var versionCheck = serverVersion.CompareTo(clientVersion);
 
-            // 0 ÀÌ¸é °°°í, -1ÀÌ¸é ¼­¹ö°¡ ÀÛÀ½
+            // 0 ì´ë©´ ê°™ê³ , -1ì´ë©´ ì„œë²„ê°€ ì‘ìŒ
             if (versionCheck <= 0 || clientVersion == null)
             {
                 IsCorrectVersion = true;
                 afterFunc?.Invoke();
             }
 
-            else // ¹öÀüÀÌ ÀÏÄ¡ÇÏÁö ¾ÊÀ» °æ¿ì °­Á¦ ¾÷µ¥ÀÌÆ®ÀÎÁö Ã¼Å©ÇÑ´Ù.
+            else // ë²„ì „ì´ ì¼ì¹˜í•˜ì§€ ì•Šì„ ê²½ìš° ê°•ì œ ì—…ë°ì´íŠ¸ì¸ì§€ ì²´í¬í•œë‹¤.
             {
                 var forceUpdate = bro.GetReturnValuetoJSON()["type"].ToString();
-                if (forceUpdate == "1") // °­Á¦ ¾÷µ¥ÀÌÆ®°¡ ¾Æ´Ò°æ¿ì
+                if (forceUpdate == "1") // ê°•ì œ ì—…ë°ì´íŠ¸ê°€ ì•„ë‹ê²½ìš°
                 {
                     IsCorrectVersion = true;
                     afterFunc?.Invoke();
@@ -265,7 +234,7 @@ public class BackendServerManager : Singleton<BackendServerManager>
         SecurityManager.Instance.Error_Event();
 
         MessageNotificationManager.Instance.ShowMessageNotification(
-            "¹öÀüÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù. \nÇÃ·¹ÀÌ½ºÅä¾î¿¡¼­ ¾÷µ¥ÀÌÆ®¸¦ ÁøÇà ÈÄ, Àç½ÇÇà ÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.",
+            INCORRECT_VERSION_UPDATE_MESSAGE,
             MessageUI_ButtonGroupType.PlayStore, () =>
             {
                 Application.OpenURL(playStoreURL);
@@ -299,5 +268,6 @@ public class BackendServerManager : Singleton<BackendServerManager>
     }
     #endregion
 
-    // --- Áß·« ---
+    // --- ì¤‘ëµ ---
 }
+
