@@ -1,3 +1,15 @@
+//----------------------------------------------------------------------------------------------------
+// 이 파일은 제출 편의를 위해 일부 구간을 발췌했습니다.
+//
+// 목적 : 인게임 재화 관리 및 UI 반영을 담당
+// 
+// 주요 기능
+// - 대규모 자릿수(억, 조, 경 등...), 단위 변환 및 문자열 포맷 구현 
+// - 재화 UI 연동 및 실시간 텍스트 업데이트 처리
+// - 재화 사용/획득 시 업적 달성도, 뽑기(소환) 등 연계 시스템과 동기화
+// - 방치형 RPG의 핵심인 경제 시스템(재화 시스템)을 안정적으로 지원하도록 구현
+//----------------------------------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -38,7 +50,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
 
     #region Serialize Fields
     [Space]
-    [Header("   - ��ȭ �Ŵ��� (Currency Manager)")]
+    [Header("   - 재화 매니저 (Currency Manager)")]
     [SerializeField] private UICurrency[] currencyUIs = new UICurrency[PREVIEW_CURRENCY_CNT];
     #endregion
 
@@ -120,8 +132,8 @@ public class CurrencyManager : Singleton<CurrencyManager>
         return string.Format("{0}{1}", _value.ToString(unitType < 1 ? "N0" : "#.##"), LocalDB_Currency.unitString[unitType]);
     }
 
-    // ���� ũ�⿡ ���� �ڸ��� �����ְ� ���� �ٿ��ִ� �Լ�.
-    // �ܺο����� ���ڸ� ������ ���ڿ��� �ٲ��ְԲ� �ص�
+    // 숫자 크기에 따라 자릿수 나눠주고 단위 붙여주는 함수.
+    // 외부에서도 숫자를 넣으면 문자열로 바꿔주게끔 해둠
     public ObscuredString GenerateNumberText(ObscuredDouble value)
     {
         ObscuredBool isMinusValue = false;
@@ -367,3 +379,4 @@ public class CurrencyManager : Singleton<CurrencyManager>
     }
     #endregion
 }
+
