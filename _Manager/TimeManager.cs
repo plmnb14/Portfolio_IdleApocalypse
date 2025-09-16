@@ -1,3 +1,14 @@
+//----------------------------------------------------------------------------------------------------
+// 목적 : 게임 내 시간 동기화, 오프라인 보상, 일/주/월간 리셋 이벤트 관리
+// 
+// 주요 기능
+// - 서버 시간과 동기화하여 오프라인 보상 및 출석 로직 구현
+// - Coroutine 기반 일/주/월 단위 사이클을 초기화 이벤트 및 자동 관리 처리
+// - 경량화된 Timer Pool(MyTimer)로 다수의 타이머 효율 관리
+// - SaveDataManager과 연동해 주기적 저장 처리 (자동 저장)
+//  시간 기반 컨텐츠에 기반이되는 시간 매니저
+//----------------------------------------------------------------------------------------------------
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -158,19 +169,19 @@ public class TimeManager : Singleton<TimeManager>, SaveDataManagement
     #region Change Methods
     private void ChangeDayEvent()
     {
-        // �ϰ� �ʱ�ȭ
+        // 일간 초기화
         SaveDataManager.Instance.ReCheck_DateChange(Product_LimitResetType.Daily);
     }
 
     private void ChangeWeekEvent()
     {
-        // �ְ� �ʱ�ȭ
+        // 주간 초기화
         SaveDataManager.Instance.ReCheck_DateChange(Product_LimitResetType.Weekly);
     }
 
     private void ChangeMonthEvent()
     {
-        // ���� �ʱ�ȭ
+        // 월간 초기화
         SaveDataManager.Instance.ReCheck_DateChange(Product_LimitResetType.Monthly);
     }
     #endregion
@@ -287,4 +298,5 @@ public class MyTimer
         _timerCorouine = null;
     }
     #endregion
+
 }
