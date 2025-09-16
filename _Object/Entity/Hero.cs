@@ -1,3 +1,13 @@
+//----------------------------------------------------------------------------------------------------
+// 목적 : 플레이어 캐릭터의 런타임 로직(조준, 자동공격, 스킬(수동/자동), 상태이상, 연출) 및 무기/투사체 제어
+// 
+// 주요 기능
+// - Target 탐색 -> 조준(에이밍) -> 자동/수동 스킬 or 평타 발동 파이프라인
+// - DOTween, MaterialProprtyBlock을 활용한 타격/피격 연출 및 무기/팔 스프라이트 동기화
+// - ProjectileShooter와 연계한 원거리 공격, 상태머신 적용(Idle, Run, Skill, Die, Aim, Attack, Skill)
+// - TimeManager, MonsterManager, SkillManager와 연동
+// - 전투의 핵심 루프(조준-> 공격-> 쿭다운)를 구현
+//----------------------------------------------------------------------------------------------------
 using CodeStage.AntiCheat.ObscuredTypes;
 using DG.Tweening;
 using System.Collections;
@@ -1005,5 +1015,5 @@ public class Hero : Entity
         return returnValue;
     }
     #endregion
-
 }
+
