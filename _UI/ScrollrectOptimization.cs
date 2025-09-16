@@ -1,8 +1,11 @@
 //----------------------------------------------------------------------------------------------------
-// 가로, 세로 ScrollRect 최적화를 위한 Class 입니다.
-//
-// ScrollRect에서 보이는 항목만 활성화해 Canvas Rebuild 및 오버헤드 줄이는 것이 목적입니다.
-// 한 줄에 보이는 개수(countInGroup)을 설정해 반복 연산량을 줄였습니다.
+// 목적 : ScrollRect 가시 영역 기반의 활성/비활성화로 Canvas Rbuild 및 DrawCall 최적화
+// 
+// 주요 기능
+// - 세로/가로 스크롤 분리 함수 제공, 한줄 단위(CountInGroup) 배치로 루츠 수 축소(최적화)
+// - UIObject 중 활성화된 오브젝트의 RectRransform 좌표를 활용해 '보이는 것만 활성화'하도록 구현
+// - ShowSlotIndexList 반환으로 추가 연출 및 제어가 가능하도록 설계
+// - 대규모 리스트, 그리드(인벤토리, 미리보기, 목록 등...)에서 성능을 확보하도록 함
 //----------------------------------------------------------------------------------------------------
 
 using CodeStage.AntiCheat.ObscuredTypes;
@@ -178,4 +181,5 @@ public static class ScrollRectOptimization
     }
     #endregion
 }
+
 
