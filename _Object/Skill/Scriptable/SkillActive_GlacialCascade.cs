@@ -1,8 +1,11 @@
 //----------------------------------------------------------------------------------------------------
-// SkillPrefab을 상속받아 스킬 효과/연출한 Class 입니다.
-//
-// Scriptable Object (SkillPrefab) 기반 스킬 파이프 라인 (시전 -> 효과 실행 -> 관련 VFX 스폰 / 연출)
-// Skill 능력치에 따라 Scale, AnimationSpeed, 이펙트 개수가 다르게 나오도록 설정했습니다.
+// 목적 : ScriptableObject(SkillPrefab) 기반 스킬 "빙하폭포"의 실행 로직
+// 
+// 주요 기능
+// - 스킬 고유 파이프라인 (시전 -> 효과 -> Vfx Spawn), 능력치에 따른 Sacle,AnimationSpeed, Spawn 개수 변화
+// - 투척 지뢰(Mine) 형태의 스킬로 설치 거리, 개수, 속도 계산, UsePosition 및 TargetingPosition 세팅
+// - VfxBattleMine 호출 -> 연쇄되는 Vfx 생성 & 타이머로 제어
+// - UniqueAbilityGroup(코어스톤/특성/기본 스킬값) 값으로 동적 파라미터 계산
 //----------------------------------------------------------------------------------------------------
 using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEngine;
@@ -86,5 +89,6 @@ public class SkillActive_GlacialCascade : SkillPrefab
         }
     }
 }
+
 
 
