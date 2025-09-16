@@ -1,4 +1,15 @@
-// ÀÌ ÆÄÀÏÀº Á¦Ãâ ÆíÀÇ¸¦ À§ÇØ ÀÏºÎ ±¸°£À» ¹ßÃéÇß½À´Ï´Ù.
+//----------------------------------------------------------------------------------------------------
+// ì´ íŒŒì¼ì€ ì œì¶œ í¸ì˜ë¥¼ ìœ„í•´ ì¼ë¶€ êµ¬ê°„ì„ ë°œì·Œí–ˆìŠµë‹ˆë‹¤.
+//
+// ëª©ì  : ìœ ì € ì •ì¥ ë°ì´í„°(ì €ì¥, ì¸ë²¤í† ë¦¬, ë­í¬ ë“±...)ì„ ì„œë²„ ë™ê¸°í™” ë° ê´€ë¦¬
+// 
+// ì£¼ìš” ê¸°ëŠ¥
+// - ë’¤ë(Backend)ì„œë²„ì™€ ì—°ë™í•´ ë‹¨ì¼ ì €ì¥/ë¡œë“œ, íŠ¸ëœì ì…˜ ì €ì¥/ë¡œë“œ ì²˜ë¦¬ 
+// - ìë™ì €ì¥/ìˆ˜ë™ì €ì¥ ì¿¨íƒ€ì„ ì œì–´ ë° ì €ì¥ ì˜ˆì™¸ ì²˜ë¦¬ ê´€ë¦¬
+// - ë‹¤ì¤‘ í…Œì´ë¸”(UserInfo, SkillInventory ë“±...) ë™ê¸°í™” ì§€ì›
+// - ê²°ì œ, ë³´ìƒ ë“± ì„œë²„ ë¡œê·¸ ê¸°ë¡ê³¼ ì—°ê³„
+// - ë°ì´í„° ë¬´ê²°ì„±ê³¼ ì•ˆì •ì„±ì„ ë³´ì¥í•˜ëŠ” í•µì‹¬ ì €ì¥ ë§¤ë‹ˆì €
+//----------------------------------------------------------------------------------------------------
 
 using BackEnd;
 using CodeStage.AntiCheat.ObscuredTypes;
@@ -19,7 +30,6 @@ public class SaveDataManager : Singleton<SaveDataManager>
         End
     }
     #endregion
-
 
     #region Delegate
     public delegate void AfterUpdateFunc(BackendReturnObject callBack);
@@ -44,8 +54,8 @@ public class SaveDataManager : Singleton<SaveDataManager>
     #region Private Fields
     private readonly string[] dataTableNames = new string[]
         {
-            // 2025-09-16 : ½Ç½Ã°£À¸·Î Àû¿ëÁßÀÎ Å×ÀÌºí ÀÌ¸§ÀÌ¶ó º¯°æ
-            "User_PaidStoreData", "User_UserInfoData", "User_SkillInventoryData", "User_Rank", "User_AdvancedInfo"
+            // 2025-09-16 : ì‹¤ì‹œê°„ìœ¼ë¡œ ì ìš©ì¤‘ì¸ í…Œì´ë¸”ëª…ì´ë¼ ê°€ëª…ìœ¼ë¡œ ë³€ê²½
+            "User_StoreData", "User_PlayData", "User_SkillData", "User_RankData", "User_ExtraData"
         };
 
     public Dictionary<SaveDataType_Server, GameSaveData> SaveDataDict { get; private set; } = new();
@@ -144,10 +154,10 @@ public class SaveDataManager : Singleton<SaveDataManager>
         if (isButtonSave && PauseManuelSave)
         {
             MessageNotificationManager.Instance.ShowInstanceMessageNotification(
-                string.Format("{0}ÃÊ ÈÄ ÀúÀåÇÒ ¼ö ÀÖ½À´Ï´Ù.", cur_ManuelSaveCoolSec.ToString("N0")));
+                string.Format("{0}ì´ˆ í›„ ì €ì¥í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.", cur_ManuelSaveCoolSec.ToString("N0")));
         }
 
-        // ÀúÀå°¡´ÉÇÒ ¶§, ÃÖÁ¾Á¢¼Ó½Ã°£À» Ç×»ó ¾÷µ¥ÀÌÆ® ÇÑ´Ù.
+        // ì €ì¥ê°€ëŠ¥í•  ë•Œ, ìµœì¢…ì ‘ì†ì‹œê°„ì„ í•­ìƒ ì—…ë°ì´íŠ¸ í•œë‹¤.
         else
         {
             var usersaveData = SaveDataDict[SaveDataType_Server.UserInfo] as UserInfo_GameSaveData;
@@ -171,14 +181,14 @@ public class SaveDataManager : Singleton<SaveDataManager>
             else
             {
                 if(!isAutoSave)
-                    MessageNotificationManager.Instance.EnableServerConnectingScreen(true, "µ¥ÀÌÅÍ¸¦ ÀúÀå ÁßÀÔ´Ï´Ù.");
+                    MessageNotificationManager.Instance.EnableServerConnectingScreen(true, "ë°ì´í„°ë¥¼ ì €ì¥ ì¤‘ì…ë‹ˆë‹¤.");
 
                 if (gameSaveDataList.Count == 1)
                 {
                     var saveData = gameSaveDataList[0];
                     saveData.SetUpLocalDataToServer();
 
-                    // ÀúÀåÇÒ µ¥ÀÌÅÍ°¡ 1°³¸é ±×³É ¾÷·Îµå
+                    // ì €ì¥í•  ë°ì´í„°ê°€ 1ê°œë©´ ê·¸ëƒ¥ ì—…ë¡œë“œ
                     SendQueue.Enqueue(Backend.PlayerData.UpdateMyLatestData,
                         saveData.TableName.GetDecrypted(), saveData.GetParam(), callback =>
                         {
@@ -212,7 +222,7 @@ public class SaveDataManager : Singleton<SaveDataManager>
                         data.AddUpdateTransactionParam(ref transactionWrite);
                     }
 
-                    // ÀúÀåÇÒ µ¥ÀÌÅÍ°¡ 2°³ ÀÌ»óÀÌ¸é Trasnsction¹æ½ÄÀ¸·Î ÀúÀå
+                    // ì €ì¥í•  ë°ì´í„°ê°€ 2ê°œ ì´ìƒì´ë©´ Trasnsctionë°©ì‹ìœ¼ë¡œ ì €ì¥
                     SendQueue.Enqueue(Backend.PlayerData.TransactionWrite, transactionWrite, callback =>
                     {
                         if (callback.IsSuccess())
@@ -327,8 +337,8 @@ public class SaveDataManager : Singleton<SaveDataManager>
         autoSaveTimer = StartCoroutine(Auto_SaveTimer());
     }
 
-    // ÀÚµ¿ÀúÀå 15ºĞ
-    // ÀıÀü¸ğµå 30ºĞ or 1½Ã°£
+    // ìë™ì €ì¥ 15ë¶„
+    // ì ˆì „ëª¨ë“œ 30ë¶„ or 1ì‹œê°„
     private readonly ObscuredFloat max_AutoSaveCoolSec = 1200.0f;
     private readonly ObscuredFloat max_ManuelSaveCoolSec = 30.0f;
     private ObscuredFloat cur_AutoSaveCoolSec = 0.0f;
@@ -371,5 +381,6 @@ public class SaveDataManager : Singleton<SaveDataManager>
     }
     #endregion
 
-    // --- Áß·« ---
+    // --- ì¤‘ëµ ---
 }
+
