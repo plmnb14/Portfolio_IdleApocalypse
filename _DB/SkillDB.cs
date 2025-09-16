@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------------------------------
-// 목적 : ScriptableObject(SkillPrefab) 기반 스킬 "빙하폭포"의 실행 로직
+// 목적 : 스킬 데이터 모델과 능력치 그룹 로직
 // 
 // 주요 기능
 // - AttackDB : 공격 정보를 담은 Class 입니다.
@@ -558,6 +558,7 @@ public abstract class SkillPrefab : ScriptableObject
     #endregion
 
 }
+
 
 
 
