@@ -1,7 +1,12 @@
 //----------------------------------------------------------------------------------------------------
-// 전투에 사용되는 VFX Class 입니다.
-//
-// 충돌/후처리 등 공통 기능을 지니고 있으며, 디테일한 부분은 자식 VFX에서 작성하도록 했습니다.
+// 목적 : 전투 이펙트의 공통 베이스 (충돌, 피해계산, 후처리, CamShake, 연출 등...)
+// 
+// 주요 기능
+// - BattleDB(유저, 타겟, 공격DB, 능력치 등) 구성 -> 충돌 시 해당 정보를 넘겨 대상끼리 BattleCaculator에서 피해 산출
+// - OnColide 이벤트, 피격 이펙트, 상태이상 및 넉백 등 후처리 제공
+// - 차지 (Begin -> Charge -> End) 방식과 시작끝 (Begin -> Loop -> End) 방식의 전투 이펙트 지원
+// - 애니메이션 이벤트/타이머 기반의 사운드, 함수 제어
+// - 다양한 전투 Vfx가 상속해 공통 로직을 재사용하는 기반 클래스
 //----------------------------------------------------------------------------------------------------
 
 using CodeStage.AntiCheat.ObscuredTypes;
@@ -282,6 +287,7 @@ public class VFXBattle : VFX
     public virtual void FuncAfterCharged(ObscuredBool boolen) { MyAnimator.SetBool("IsCharged", boolen); }
     #endregion
 }
+
 
 
 
