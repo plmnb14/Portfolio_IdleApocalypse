@@ -1,17 +1,19 @@
 //----------------------------------------------------------------------------------------------------
-// 스킬과 관련된 Class 들입니다.
+// 목적 : ScriptableObject(SkillPrefab) 기반 스킬 "빙하폭포"의 실행 로직
+// 
+// 주요 기능
+// - AttackDB : 공격 정보를 담은 Class 입니다.
+//              공격 타입, 속성, 이펙트 Prefab 이름, 사운드 이름 등 정보가 담겨 있습니다.
 //
-// AttackDB : 공격 정보를 담은 Class 입니다.
-//            공격 타입, 속성, 이펙트 Prefab 이름, 사운드 이름 등 정보가 담겨 있습니다.
+// - SklillDB_Cur : 스킬의 런타임 능력치와 쿨타임, 장착 여부가 담긴 Class
 //
-// SklillDB_Cur : 스킬의 런타임 능력치와 쿨타임, 장착 여부가 담긴 Class
+// - SkillDB_Save : 서버에 저장할 스킬 정보 (레벨, 장착된 코어스톤, 프리셋 여부 등...)
 //
-// SkillDB_Save : 서버에 저장할 스킬 정보 (레벨, 장착된 코어스톤, 프리셋 여부 등...)
+// - SkillDB_Server : 서버 차트에서 불러온 스킬 정보(성장 수치, 스킬 설명, 태그, 속성 등...)
+//                    스킬 상세 설명을 위한(설명 UI에 사용할) 별도의 데이터도 관리
 //
-// SkillDB_Server : 서버 차트에서 불러온 스킬 정보(성장 수치, 스킬 설명, 태그, 속성 등...)
-//
-// SkillPrefab : 실제 스킬이 동작하는 Scriptable Object입니다.
-//               자식 스킬 Class에서 세부 내용을 구성했습니다. 
+// - SkillPrefab : 실제 스킬이 동작하는 Scriptable Object입니다.
+//                 자식 스킬 Class에서 세부 내용을 구성했습니다. 
 //----------------------------------------------------------------------------------------------------
 
 using CodeStage.AntiCheat.ObscuredTypes;
@@ -556,5 +558,6 @@ public abstract class SkillPrefab : ScriptableObject
     #endregion
 
 }
+
 
 
