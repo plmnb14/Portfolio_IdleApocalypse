@@ -23,5 +23,5 @@
 --------------------------------------------------
 
 ## 시연 / 플레이스토어
-- [소개 영상] (https://youtube.com/shorts/pQmh46K99jQ)
-- [플레이스토어 링크] (https://play.google.com/store/apps/details?id=com.TariGames.IdlePostApocalyptic&hl=ko)
+- [소개 영상] : https://youtube.com/shorts/pQmh46K99jQ
+- [플레이스토어 링크] : https://play.google.com/store/apps/details?id=com.TariGames.IdlePostApocalyptic&hl=ko
