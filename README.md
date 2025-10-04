@@ -3,6 +3,7 @@
 > 2D 방치형 RPG 게임 "멸망소녀 키우기" 포트폴리오 소드코드 일부입니다.
 --------------------------------------------------
 
+/*
 ## 프로젝트 개요/목표
 - 플레이어 성장/보상 루프 설계
 - SkillDB 기반 자동 전투 스킬 시스템
@@ -10,11 +11,13 @@
 --------------------------------------------------
 
 ## 주요 시스템
-- `SkillSystem` : SkillBase / SkillEffect / DB 기반 스킬 연동
-- `MonsterSystem` : FSM 기반 몬스터 상태 제어
+- `CharacterSystem` : Entity / Hero / Monster - 상태, 이동, FSM 기반 전투 루프
+- `SkillSystem` : SkillBase / SkillEffect - DB 기반 스킬 연동 / VFX 제어
+- `MonsterSystem` : MonsterBoxx - FSM 기반 몬스터 상태 제어
 - `PlayerManager` : Idle 성장 / Reward 루프
 - `GameManager` : 전체 런타임 제어
 --------------------------------------------------
+*/
 
 ## 개발 환경
 - Unity 2023.2.20f1
