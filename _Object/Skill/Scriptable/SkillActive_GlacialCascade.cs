@@ -63,6 +63,7 @@ public class SkillActive_GlacialCascade : SkillPrefab
             (int)AbilityType_Skill.Object_ThrowLand_Spd,
             Ability_ValueType.Value, Ability_CalcValueType.Final) : 1.0f;
 
+        // 랜덤값 임시로 설정
         for (var i = 0; i < maxLandCnt; i++)
         {
             var xPosition = 0.0f;
@@ -89,6 +90,7 @@ public class SkillActive_GlacialCascade : SkillPrefab
         }
     }
 }
+
 
 
 
